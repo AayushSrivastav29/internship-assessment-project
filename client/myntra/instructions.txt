@@ -1,0 +1,3 @@
+Consider an ecommerce website selling clothes. You have to design a page with searchbar - on typing in the searchbar the relevant clothes get shown below. There is no enter button for the search button - the results are shown as you type - when the character count exceeds 3 alphabets.
+
+Your front-end code should be in Tailwind CSS or Bootstrap, and using plain javascript (not react). You are free to use any backend technology. usage of Laravel is preferable but not required. 
