@@ -9,9 +9,7 @@ document.getElementById('searchBar').addEventListener('input', function() {
     const query = this.value;
     if (query.length > 3) {
         searchClothes(query);
-    } else {
-        fetchClothes();
-    }
+    } 
 });
 
 function fetchClothes() {
@@ -33,6 +31,7 @@ function searchClothes(query) {
             console.error('Error searching clothes:', error);
         });
 }
+
 
 function displayClothes(clothes) {
     const resultsDiv = document.getElementById('results');
