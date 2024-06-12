@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "./GetQuote.css"; // Create and import a CSS file for styling
+import GetInfo from "./GetInfo";
 
 const GetQuote = ({ closeModal }) => {
   const [selectedServices, setSelectedServices] = useState([]);
+  const [showGetInfo, setShowGetInfo] = useState(false);
 
   const services = [
     { id: 1, name: "Soft Wash Home Washing", icon: "🏠" },
@@ -26,37 +27,46 @@ const GetQuote = ({ closeModal }) => {
     );
   };
 
+  const handleNext = () => {
+    setShowGetInfo(true);
+  };
+
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-header">
-          <h2>General Information</h2>
-          <button onClick={closeModal} className="close-button">
-            &times;
-          </button>
-        </div>
-        <div className="modal-body">
-          <h3>Select the services that you are interested in:</h3>
-          <div className="service-list">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`service-item ${
-                  selectedServices.includes(service.id) ? "selected" : ""
-                }`}
-                onClick={() => selectServiceHandler(service.id)}
-              >
-                <div className="service-icon">{service.icon}</div>
-                <div className="service-name">{service.name}</div>
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+      <div className="bg-white p-5 rounded-lg w-11/12 max-w-lg">
+        {!showGetInfo ? (
+          <>
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl">General Information</h2>
+              <button onClick={closeModal} className="text-2xl">&times;</button>
+            </div>
+            <div className="mt-4">
+              <h3 className="text-xl mb-2">Select the services that you are interested in:</h3>
+              <div className="flex flex-wrap gap-3 justify-center">
+                {services.map((service) => (
+                  <div
+                    key={service.id}
+                    className={`flex flex-col items-center p-3 border rounded-lg cursor-pointer w-24 h-24 text-center ${selectedServices.includes(service.id) ? 'bg-teal-100 border-teal-500' : 'bg-white border-gray-300'}`}
+                    onClick={() => selectServiceHandler(service.id)}
+                  >
+                    <div className="text-3xl mb-1">{service.icon}</div>
+                    <div className="text-sm">{service.name}</div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="modal-footer">
-          <button onClick={closeModal} className="next-button">
-            Next
-          </button>
-        </div>
+            </div>
+            <div className="flex justify-between mt-4">
+              <button onClick={closeModal} className="bg-blue-500 text-white py-2 px-4 rounded-lg">
+                Back
+              </button>
+              <button onClick={handleNext} className="bg-blue-500 text-white py-2 px-4 rounded-lg">
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          <GetInfo closeModal={closeModal} />
+        )}
       </div>
     </div>
   );
